@@ -1,0 +1,23 @@
+---
+import "../../styles/main.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOGIC Soluciones Técnicas</title>
+<meta name="description" content="Reparación y mantenimiento de equipo médico y estético">
+<script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+    <Header />
+    <slot />
+    <Footer />
+</body>
+</html>

@@ -1,0 +1,50 @@
+---
+import { weeklySchedule } from "../data/weeklySchedule"
+
+const daysMap: Record<number, string> = {
+	0: "Domingo",
+	1: "Lunes",
+	2: "Martes",
+	3: "Miércoles",
+	4: "Jueves",
+	5: "Viernes",
+	6: "Sábado"
+}
+
+const currentDay = daysMap[new Date().getDay()]
+---
+
+<section class="service-availability">
+    <div class="schedule-container">
+        <div>
+            <h2>Horario Semanal</h2>
+            <p>Disponibilidad de servicio los 5 días de la semana.</p>
+        </div>
+        <div class="weekly-schedule-container">
+            {
+                weeklySchedule.map((day) => (
+                    <div class={day.weekday === currentDay ? "current-day" : ""}>
+                        {
+                            day.weekday === currentDay && (
+                                <span>Hoy</span>
+                            )
+                        }
+                        <span class="weekday">{day.weekday}</span>
+                        <span class="schedule">{day.schedule}</span>
+                    </div>
+                ))
+            }
+            <div class="weekday-schedule">
+                <p class="weekday">Sábado</p>
+                <p class="schedule">Cerrado</p>
+            </div>
+        </div>
+    </div>
+    <div class="availability-container">
+        <img src="" alt="costa-rica-7-provinces" />
+        <div>
+            <h2>Servicio en las <span>7 Provincias</span></h2>
+            <h2><span>Revisión gratis</span> dentro de la <span>GAM</span></h2>
+        </div>
+    </div>
+</section>

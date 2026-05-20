@@ -1,0 +1,134 @@
+---
+import "../../styles/contact.css"
+import { contact } from "../data/contact";
+import Layout from "../layouts/Layout.astro";
+import ServiceAvailability from "../components/ServiceAvailability.astro";
+---
+
+<Layout>
+    <main>
+        <section class="hero-contact">
+            <div>
+                <h1>Contáctanos</h1>
+                <ul class="contact-information">
+                    {
+                        contact.map((contact) => (
+                            <li class="contact-information-element">
+                                <div class="icon">
+                                    <iconify-icon icon={contact.icon}></iconify-icon>
+                                </div>
+                                <p>{contact.description}</p>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <form class="contact-form">
+                <div class="name-row">
+                    <div class="input-group">
+                        <label for="first-name">
+                            Nombre *
+                        </label>
+
+                        <input
+                            id="first-name"
+                            name="first-name"
+                            type="text"
+                            required
+                        />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="last-name">
+                            Apellido *
+                        </label>
+
+                        <input
+                            id="last-name"
+                            name="last-name"
+                            type="text"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">
+                        Correo de Gmail *
+                    </label>
+
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        required
+                    />
+                </div>
+
+                <div class="input-group">
+                    <label for="phone">
+                        Teléfono
+                    </label>
+
+                    <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                    />
+                </div>
+
+                <div class="input-group">
+                    <label for="message">
+                        Redacta aquí tu mensaje
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                    ></textarea>
+                </div>
+
+                <button type="submit">
+                    Enviar
+                </button>
+            </form>
+
+            <script>
+                const form = document.querySelector(".contact-form") as HTMLFormElement
+
+                form?.addEventListener("submit", (event) => {
+                    event.preventDefault()
+
+                    const formData = new FormData(form)
+
+                    const firstName = formData.get("first-name")
+                    const lastName = formData.get("last-name")
+                    const email = formData.get("email")
+                    const phone = formData.get("phone")
+                    const message = formData.get("message")
+
+                    const subject = encodeURIComponent(
+                        `Nuevo mensaje de ${firstName} ${lastName}`
+                    )
+
+                    const body = encodeURIComponent(
+                        `Nombre: ${firstName} ${lastName}
+
+                        Correo: ${email}
+
+                        Teléfono: ${phone}
+
+                        Mensaje:
+                        ${message}`
+                    )
+
+                    window.location.href = `mailto:tuemail@gmail.com?subject=${subject}&body=${body}`
+                })
+            </script>
+		</section>
+        <ServiceAvailability />
+        <div>
+            IFRAME FOR GOOGLE MAPS PENDING
+        </div>
+    </main>
+</Layout>

@@ -1,0 +1,44 @@
+---
+import { contact } from "../data/contact";
+import Navbar from "./Navbar.astro";
+---
+
+<>
+    <div>
+        <p>¿Quieres agendar una cita? Contáctanos</p>
+        <div>
+            <a 
+                class="btn-whatsapp" 
+                href="https://wa.me/50683802710"
+                target="_blank"
+            >
+                Whatsapp
+            </a>
+            <a class="btn-email">Correo electrónico</a>
+        </div>
+    </div>
+    <div class="footer-contact-information">
+        {
+            contact.map((contact) => (
+                <div class="footer-contact-information-box">
+                    <div class="icon">
+                        <iconify-icon icon={contact.icon}></iconify-icon>
+                    </div>
+                    <h3>{contact.title}</h3>
+                    <p>{contact.description}</p>
+                </div>
+            ))
+        }
+    </div>
+    <img src="" alt="logic-st-logo" />
+    <Navbar />
+    <hr>
+    <div class="copyright-container">
+        <p>
+            © 2026 LOGIC Soluciones Técnicas (LOGIC S.T CR). 
+        </p>
+        <p>
+            Developed by DELTA Development and Design
+        </p>
+    </div>
+</footer>

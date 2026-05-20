@@ -1,0 +1,81 @@
+---
+import "../../styles/index.css"
+import { services } from "../data/services";
+import Layout from "../layouts/Layout.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import ClientCarousel from "../components/ClientCarousel.astro";
+import ServiceAvailability from "../components/ServiceAvailability.astro";
+---
+
+<Layout>
+	<main>
+		<section class="hero-index">
+			<div class="hero-text">
+				<span class="hero-brand">
+					LOGIC ST - SOLUCIONES TECNICAS
+				</span>
+				<h1 class="hero-title">
+					Reparación y mantenimiento 
+					de equipo médico y estético
+				</h1>
+				<p class="hero-description">
+					Servicio técnico profesional para clínicas,
+					consultorios y centros estéticos.
+				</p>
+				<div class="hero-cta-container">
+					<p class="hero-cta-text">
+						¿Quieres agendar una cita? Contáctanos
+					</p>
+					<div class="hero-buttons">
+						<a 
+							class="btn-whatsapp hero-cta-button" 
+							href="https://wa.me/50683802710"
+							target="_blank"
+						>
+							<iconify-icon icon="mdi:whatsapp" style="color: white;"></iconify-icon>
+							Whatsapp
+						</a>
+						<a 
+							class="btn-email hero-cta-button"
+							href="/contact"
+							target="_blank"
+						>
+							<iconify-icon icon="mdi:email" style="color: white;"></iconify-icon>
+							Correo electrónico
+						</a>
+						<a 
+							class="btn-facebook hero-cta-button"
+							href=""
+							target="_blank"
+						>
+							<iconify-icon class="" icon="mdi:facebook" style="color: white;"></iconify-icon>
+							Facebook
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<img src="" alt="logic-hand" />
+		</section>
+		<section class="services">
+			<h2>Nuestros Servicios</h2>
+			<div class="services_list">
+				{
+					services.map((service) => (
+						<ServiceCard
+							image={service.image}
+							title={service.title}
+							description={service.description}
+						/>
+					))
+				}
+			</div>
+		</section>
+		<section class="clients">
+			<h2>Empresas que confían en nuestro servicio</h2>
+			<p>Brindamos servicio técnico a más de 50 clínicas y centros estéticos en diferentes partes de Costa Rica.</p>
+			<ClientCarousel/>
+		</section>
+		<ServiceAvailability />
+	</main>
+</Layout>
