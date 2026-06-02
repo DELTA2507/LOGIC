@@ -1,0 +1,45 @@
+---
+import "./CTAButton.css"
+
+interface Props {
+    type: "whatsapp" | "email" | "facebook"
+}
+
+const { type } = Astro.props
+
+const button_config = {
+    whatsapp: {
+        href: "https://wa.me/50683802710",
+        label: "Whatsapp",
+        icon: "mdi:whatsapp",
+        class_name: "btn-whatsapp"
+    },
+    email: {
+        href: "/contact",
+        label: "Correo electrónico",
+        icon: "mdi:email",
+        class_name: "btn-email"
+    },
+    facebook: {
+        href: "https://www.facebook.com/logic.estetica",
+        label: "Facebook",
+        icon: "mdi:facebook",
+        class_name: "btn-facebook"
+    }
+}
+
+const config = button_config[type]
+---
+
+<a
+    class={`hero-cta-button ${config.class_name}`}
+    href={config.href}
+    target="_blank"
+>
+    <iconify-icon
+        icon={config.icon}
+        style="color: white;"
+    ></iconify-icon>
+
+    {config.label}
+</a>

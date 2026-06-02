@@ -1,0 +1,95 @@
+.hero-index {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 4rem;
+
+    padding: 4rem 8rem;
+
+    min-height: 90vh;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+
+    gap: 2rem;
+
+    max-width: 700px;
+}
+
+.hero-brand {
+    letter-spacing: 0.25em;
+}
+
+.hero-title {
+    font-size: 3rem;
+    line-height: 1.1;
+}
+
+.hero-description {
+    line-height: 1.6;
+}
+
+.hero-cta-container {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.hero-cta-text {
+    font-weight: 700;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 1rem;
+}
+
+@media (max-width: 926px) {
+
+    .hero-index {
+        flex-direction: column-reverse;
+
+        justify-content: center;
+        align-items: flex-start;
+
+        gap: 3rem;
+
+        padding: 3rem 2rem;
+
+        min-height: auto;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-title {
+        font-size: 2.25rem;
+    }
+
+    .hero-buttons {
+        display: grid;
+
+        width: 100%;
+
+        grid-template-columns: repeat(2, 1fr);
+
+        gap: 1rem;
+    }
+
+    .hero-buttons > * {
+        width: 100%;
+    }
+
+    .hero-buttons > :last-child {
+        grid-column: 1 / -1;
+    }
+
+}

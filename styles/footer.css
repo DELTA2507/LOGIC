@@ -1,0 +1,183 @@
+.footer {
+    padding: 5rem 2rem 2rem;
+
+    background:
+        linear-gradient(
+            180deg,
+            #3d3d3d 0%,
+            #0f0f0f 100%
+        );
+
+    border-top-left-radius: 6rem;
+    border-top-right-radius: 6rem;
+}
+
+.footer-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    gap: 2rem;
+
+    margin-bottom: 3rem;
+}
+
+.footer-cta h2 {
+    color: white;
+    margin: 0;
+
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.footer-cta h2 span {
+    color: white;
+    display: block;
+
+    margin-top: .5rem;
+
+    font-weight: 500;
+}
+
+.footer-cta-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 1rem;
+}
+
+.btn-whatsapp,
+.btn-email {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+
+    padding: .9rem 1.8rem;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    transition: .2s ease;
+}
+
+.btn-whatsapp {
+    color: white;
+    background: #25d366;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-2px);
+}
+
+.btn-email {
+    color: white;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: black;
+}
+
+.btn-email:hover {
+    transform: translateY(-2px);
+}
+
+.footer-brand {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 2rem;
+}
+
+.footer-brand img {
+    width: 180px;
+    height: auto;
+
+    border-radius: .5rem;
+}
+
+.footer-contact-information-container {
+    display: flex;
+    justify-content: center;
+}
+
+.footer-contact-information {
+    display: flex;
+    flex-direction: column;
+
+    align-items: left;
+
+    gap: .75rem;
+
+    margin-bottom: 3rem;
+}
+
+.footer-contact-information {
+    display: flex;
+    flex-direction: column;
+
+    align-items: left;
+
+    gap: .75rem;
+
+    margin-bottom: 3rem;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+}
+
+.footer-contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 3rem;
+    height: 3rem;
+
+    font-size: 1.8rem;
+
+    border-radius: 100%;
+
+    background: rgb(255, 255, 255);
+}
+
+.footer-contact-item p {
+    margin: 0;
+    color: #d6d6d6;
+}
+
+.footer-navigation {
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 2rem;
+}
+
+.footer-divider {
+    max-width: 700px;
+
+    margin: 0 auto 1.5rem;
+
+    border: none;
+    border-top: 1px solid rgba(255,255,255,.15);
+}
+
+.footer-copyright {
+    text-align: center;
+
+    color: #cfcfcf;
+
+    font-size: .9rem;
+}
+
+.footer-copyright p {
+    color: #cfcfcf;
+    margin: .25rem 0;
+}

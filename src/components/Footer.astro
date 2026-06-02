@@ -1,44 +1,72 @@
 ---
-import { contact } from "../data/contact";
-import Navbar from "./Navbar.astro";
+import "../../styles/footer.css"
+import { contact } from "../data/contact"
+import CTAButton from "./CTAButton/CTAButton.astro"
+import Navbar from "./Navbar.astro"
 ---
 
-<>
-    <div>
-        <p>¿Quieres agendar una cita? Contáctanos</p>
-        <div>
-            <a 
-                class="btn-whatsapp" 
-                href="https://wa.me/50683802710"
-                target="_blank"
-            >
-                Whatsapp
-            </a>
-            <a class="btn-email">Correo electrónico</a>
+<footer class="footer">
+
+    <div class="footer-cta">
+
+        <h2>
+            ¿Quieres agendar una cita?
+            <span>Contáctanos</span>
+        </h2>
+
+        <div class="footer-cta-actions">
+
+            <CTAButton type="whatsapp" />
+            <CTAButton type="email" />
+            <CTAButton type="facebook" />
+
+        </div>
+
+    </div>
+
+    <div class="footer-brand">
+
+        <img
+            src="/images/logo.png"
+            alt="LOGIC Soluciones Técnicas"
+        />
+
+    </div>
+
+    <div class="footer-contact-information-container">
+        <div class="footer-contact-information">
+            {
+                contact.map((item) => (
+                    <div class="footer-contact-item">
+
+                        <div class="footer-contact-icon">
+                            <iconify-icon icon={item.icon}></iconify-icon>
+                        </div>
+
+                        <p>{item.description}</p>
+
+                    </div>
+                ))
+            }
         </div>
     </div>
-    <div class="footer-contact-information">
-        {
-            contact.map((contact) => (
-                <div class="footer-contact-information-box">
-                    <div class="icon">
-                        <iconify-icon icon={contact.icon}></iconify-icon>
-                    </div>
-                    <h3>{contact.title}</h3>
-                    <p>{contact.description}</p>
-                </div>
-            ))
-        }
+
+    <div class="footer-navigation">
+        <Navbar theme="dark"/>
     </div>
-    <img src="" alt="logic-st-logo" />
-    <Navbar />
-    <hr>
-    <div class="copyright-container">
+
+    <hr class="footer-divider">
+
+    <div class="footer-copyright">
+
         <p>
-            © 2026 LOGIC Soluciones Técnicas (LOGIC S.T CR). 
+            © 2026 LOGIC Soluciones Técnicas (LOGIC S.T CR)
         </p>
+
         <p>
             Developed by DELTA Development and Design
         </p>
+
     </div>
+
 </footer>

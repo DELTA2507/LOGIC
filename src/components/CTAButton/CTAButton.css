@@ -1,0 +1,40 @@
+.hero-cta-button {
+    display: flex;
+    align-items: center;
+
+    padding: 10px 16px;
+
+    border-radius: 2rem;
+
+    color: white;
+    text-decoration: none;
+
+    gap: 1rem;
+
+    font-size: 15px;
+
+    transition:
+        transform .2s ease,
+        opacity .2s ease;
+}
+
+.hero-cta-button:hover {
+    transform: translateY(-3px) !important;
+    opacity: .9;
+}
+
+.hero-cta-button iconify-icon {
+    font-size: 1.5rem;
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+}
+
+.btn-email {
+    background-color: black;
+}
+
+.btn-facebook {
+    background-color: #4267B2;
+}

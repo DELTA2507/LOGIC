@@ -1,0 +1,52 @@
+.service_item {
+    overflow: hidden;
+    width: 400px;
+
+    background: #ffffff;
+    
+    border-radius: 20px;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.service_item:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+.service_item img {
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    object-fit: cover;
+}
+
+.service_item h3,
+.service_item p {
+    padding-inline: 1.5rem;
+}
+
+.service_item h3 {
+    margin: 1.5rem 0 0.75rem;
+
+    color: #111111;
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.service_item p {
+    margin: 0;
+    padding-bottom: 1.5rem;
+
+    color: #666666;
+    line-height: 1.7;
+}

@@ -6,5 +6,6 @@ header {
 }
 
 .logo {
-    width: 5rem;
+    width: 7rem;
+    border-radius: .5rem;
 }
