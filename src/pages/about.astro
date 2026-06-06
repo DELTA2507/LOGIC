@@ -1,9 +1,47 @@
 ---
+import "../../styles/page-styles/about.css"
+import AboutCarousel from "../components/AboutCarousel/AboutCarousel.astro"
 import Layout from "../layouts/Layout.astro"
 ---
 
 <Layout>
-    <main>
-        Hello
-    </main> 
+    <main class="about-main">
+        <section class="about-block">
+            <div class="about-text">
+                <div class="about-text-inner">
+                    <h1>Acerca de LOGIC</h1>
+                    <p>
+                    Ingeniero-técnico independiente con más de 22 años de experiencia en mantenimiento, diagnóstico y reparación de tecnología aplicada en el ámbito industrial y en aparatología estética profesional. Poseo conocimientos en neumática, electroneumática, hidráulica, láser, termodinámica y electrónica analógica y digital.
+                    </p>
+
+                    <p>
+                    Mi enfoque va más allá del funcionamiento básico de los equipos, abarcando el análisis completo del sistema, su correcta operación y optimización para garantizar su rendimiento. Brindo asesoría técnica especializada en aparatología estética a nivel nacional, ofreciendo soluciones prácticas que aseguran la continuidad operativa de equipos en clínicas y emprendimientos.
+                    </p>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="images/logo.png" alt="Acerca de LOGIC" />
+            </div>
+        </section>
+        <section class="about-block reverse">
+            <AboutCarousel />
+            <div class="about-text">
+                <div class="about-text-inner">
+                    <h2>Experiencia con Equipos</h2>
+                    <p>Cuento con amplia experiencia trabajando con equipos como IPL, radiofrecuencia, crioterapia, ultracavitación, laser, presoterapia, liposucción y otros equipos de uso profesional en clínicas y centros estéticos.</p>
+                </div>
+            </div>
+        </section>
+        <section class="about-block">
+            <div class="about-text">
+                <div class="about-text-inner">
+                    <h2>Misión</h2>
+                    <p>Me complace ofrecerle una mano en la reparación de su línea de aparatología estética, a domicilio si prefiere en la seguridad de su negocio y con su supervición, donde tiene la tranquilidad de ver con detalle la reparación paso a paso y saber que su maquina no va a ser desmantelada para ser donadora de repuestos a otros equipos, y que no le estan cobrando de más por repuestos que su maquina no necesita o no utiliza.</p>
+                </div>
+            </div>
+            <div class="about-image">
+                <img class="contain-override" src="images/logic-owner.jpg" alt="Acerca de LOGIC" />
+            </div>
+        </section>
+    </main>
 </Layout>

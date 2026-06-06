@@ -1,0 +1,117 @@
+.services {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* HERO */
+.services-hero {
+    background: linear-gradient(135deg, #000, #343434, #000);
+    color: white;
+    padding: 10rem 4rem;
+    text-align: center;
+}
+
+.services-hero h2 {
+    color: white;
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.services-hero p {
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    color: #ccc;
+}
+
+/* LISTA */
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    padding: 8rem 4rem;
+}
+
+/* FILA ZIG ZAG */
+.service-row {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+/* alternado */
+.service-row.reverse {
+    flex-direction: row-reverse;
+}
+
+/* IMAGEN */
+.service-image {
+    flex: 1;
+}
+
+.service-image img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+
+    transition: transform 0.3s ease;
+}
+
+.service-image img:hover {
+    transform: scale(1.03);
+}
+
+/* TEXTO */
+.service-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.service-content h3 {
+    font-size: 2rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.service-content p {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .services-hero {
+        padding: 5rem 2rem;
+    }
+
+    .services-hero h2 {
+        font-size: 2.2rem;
+    }
+
+    .services-list {
+        padding: 3rem 2rem;
+        gap: 4rem;
+    }
+
+    .service-row,
+    .service-row.reverse {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .service-image img {
+        height: 250px;
+    }
+
+    .service-content h3 {
+        font-size: 1.6rem;
+    }
+}

@@ -9,22 +9,22 @@ export const weeklySchedule = [
     },
     {
         weekday: "Lunes",
-        schedule: "Cerrado"
+        schedule: "8:00 AM - 5:00 PM"
     },
     {
         weekday: "Martes",
-        schedule: "Cerrado"
+        schedule: "8:00 AM - 5:00 PM"
     },
     {
         weekday: "Miércoles",
-        schedule: "Cerrado"
+        schedule: "8:00 AM - 5:00 PM"
     },
     {
         weekday: "Jueves",
-        schedule: "Cerrado"
+        schedule: "8:00 AM - 5:00 PM"
     },
     {
         weekday: "Viernes",
-        schedule: "Cerrado"
+        schedule: "8:00 AM - 5:00 PM"
     },
 ]

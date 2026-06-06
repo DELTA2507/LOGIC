@@ -1,23 +1,35 @@
 ---
+import "../../styles/page-styles/services.css"
 import { services } from "../data/services";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-	<main>
-		<section class="hero-services">
-            <h1>Nuestros Servicios</h1>
-		</section>
-        {
-            services.map((service) => (
-                <div>
-                    <img src={service.image} alt={service.title} />
-                    <div>
-                        <h2>{service.title}</h2>
-                        <p>{service.description}</p>
-                    </div>
-                </div>
-            ))
-        }
-	</main>
+	<main class="services">
+        <div class="services-hero">
+            <h2>Nuestros Servicios</h2>
+            <p>Diagnóstico, Reparación y Mantenimiento profesional de equipamento médico y estético</p>
+        </div>
+
+        <div class="services-list">
+            {
+                services.map((service, index) => {
+                    const isReversed = index % 2 !== 0
+
+                    return (
+                        <div class={`service-row ${isReversed ? "reverse" : ""}`}>
+                            <div class="service-image">
+                                <img src={service.image} alt={service.title} />
+                            </div>
+
+                            <div class="service-content">
+                                <h3>{service.title}</h3>
+                                <p>{service.description}</p>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </div>
+    </ma>
 </Layout>
