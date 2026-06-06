@@ -1,9 +1,17 @@
 ---
 import "../../styles/header.css"
+
 import Navbar from "./Navbar.astro"
+import MobileNavbar from "./MobileNavbar/MobileNavbar.astro"
 ---
 
 <header>
-	<img class="logo" src="/images/logo.png" alt="logic-st-logo" />
-	<Navbar theme="light"/>
+	<img
+		class="logo"
+		src="/images/logo.png"
+		alt="logic-st-logo"
+	/>
+
+	<Navbar theme="light" />
+	<MobileNavbar />
 </header>

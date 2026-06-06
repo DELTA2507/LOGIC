@@ -1,0 +1,51 @@
+---
+import "./MobileNavbar.css";
+---
+
+<button
+    id="mobile-menu-button"
+    class="mobile-menu-button"
+    aria-label="Abrir menú"
+>
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+
+<nav id="mobile-menu" class="mobile-menu">
+    <ul class="mobile-nav-link-list">
+        <li class="nav-link">
+            <a href="/">Inicio</a>
+        </li>
+
+        <li class="nav-link">
+            <a href="/services">Servicios</a>
+        </li>
+
+        <li class="nav-link">
+            <a href="/contact">Contacto</a>
+        </li>
+
+        <li class="nav-link">
+            <a href="/about">Acerca de</a>
+        </li>
+    </ul>
+</nav>
+
+<script>
+    const button = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    const overlay = document.getElementById("mobile-menu-overlay");
+
+    button?.addEventListener("click", () => {
+        menu?.classList.toggle("active");
+        overlay?.classList.toggle("active");
+    });
+
+    overlay?.addEventListener("click", () => {
+        menu?.classList.remove("active");
+        overlay?.classList.remove("active");
+    });
+</script>

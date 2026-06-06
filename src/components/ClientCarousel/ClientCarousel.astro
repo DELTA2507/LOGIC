@@ -1,0 +1,34 @@
+---
+import "./ClientCarousel.css";
+
+const clients = [
+    "images/clients/client1.png",
+    "images/clients/client2.jpg",
+    "images/clients/client3.png",
+    "images/clients/client4.png",
+];
+
+const duplicated = [...clients, ...clients];
+---
+
+<div class="carousel-container">
+    <div class="carousel-track carousel-track-left">
+        {
+            duplicated.map((logo) => (
+                <div class="logo-card">
+                    <img src={logo} alt="Cliente" loading="lazy" />
+                </div>
+            ))
+        }
+    </div>
+
+    <div class="carousel-track carousel-track-right">
+        {
+            duplicated.map((logo) => (
+                <div class="logo-card">
+                    <img src={logo} alt="Cliente" loading="lazy" />
+                </div>
+            ))
+        }
+    </div>
+</div>
