@@ -118,22 +118,8 @@
 .footer-contact-information {
     display: flex;
     flex-direction: column;
-
     align-items: left;
-
     gap: .75rem;
-
-    margin-bottom: 3rem;
-}
-
-.footer-contact-information {
-    display: flex;
-    flex-direction: column;
-
-    align-items: left;
-
-    gap: .75rem;
-
     margin-bottom: 3rem;
 }
 
@@ -187,7 +173,11 @@
     font-size: .9rem;
 }
 
-.footer-copyright p {
+.footer-copyright p, a {
     color: #cfcfcf;
     margin: .25rem 0;
+}
+
+.footer-copyright a:hover {
+    text-decoration: underline;
 }

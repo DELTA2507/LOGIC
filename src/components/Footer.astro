@@ -1,5 +1,7 @@
 ---
 import "../../styles/footer.css"
+import { Image } from "astro:assets"
+import logo from "../assets/logo.png"
 import { contact } from "../data/contact"
 import CTAButton from "./CTAButton/CTAButton.astro"
 import Navbar from "./Navbar.astro"
@@ -38,8 +40,8 @@ import Navbar from "./Navbar.astro"
 
     <div class="footer-brand">
 
-        <img
-            src="/images/logo.png"
+        <Image
+            src={logo}
             alt="LOGIC Soluciones Técnicas"
         />
 
@@ -50,13 +52,10 @@ import Navbar from "./Navbar.astro"
             {
                 contact.map((item) => (
                     <div class="footer-contact-item">
-
                         <div class="footer-contact-icon">
                             <iconify-icon icon={item.icon}></iconify-icon>
                         </div>
-
                         <p>{item.description}</p>
-
                     </div>
                 ))
             }
@@ -75,9 +74,9 @@ import Navbar from "./Navbar.astro"
             © 2026 LOGIC Soluciones Técnicas (LOGIC S.T CR)
         </p>
 
-        <p>
+        <a href="https://delta-portafolio-dev.vercel.app/" target="_blank" rel="noopener noreferrer">
             Developed by DELTA Development and Design
-        </p>
+        </a>
 
     </div>
 

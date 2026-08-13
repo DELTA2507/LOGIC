@@ -1,14 +1,16 @@
 ---
 import "../../styles/header.css"
 
+import { Image } from "astro:assets"
+import logo from "../assets/logo.png"
 import Navbar from "./Navbar.astro"
 import MobileNavbar from "./MobileNavbar/MobileNavbar.astro"
 ---
 
 <header>
-	<img
+	<Image
 		class="logo"
-		src="/images/logo.png"
+		src={logo}
 		alt="logic-st-logo"
 	/>
 

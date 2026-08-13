@@ -1,52 +1,77 @@
 ---
+import { Image } from "astro:assets"
+import costaRica from "../assets/costa-rica.png"
 import "../../styles/home-sections-styles/serviceAvailability.css"
 import { weeklySchedule } from "../data/weeklySchedule"
-
-const daysMap: Record<number, string> = {
-	0: "Domingo",
-	1: "Lunes",
-	2: "Martes",
-	3: "Miércoles",
-	4: "Jueves",
-	5: "Viernes",
-	6: "Sábado"
-}
-
-const currentDay = daysMap[new Date().getDay()]
 ---
 
 <section class="service-availability">
     <hr>
+
     <div class="schedule-container">
         <div>
             <h2>Horario Semanal</h2>
             <p>Disponibilidad de servicio los 5 días de la semana.</p>
         </div>
+
         <div class="weekly-schedule-container">
             {
-                weeklySchedule.map((day) => {
-                    const isToday = day.weekday === currentDay
-
-                    return (
-                        <div class="schedule-row">
-                            {isToday && <span class="today-tag">Hoy</span>}
-
-                            <div class={`row-content ${isToday ? "today" : ""}`}>
-                                <span class="weekday">{day.weekday}</span>
-                                <span class="schedule">{day.schedule}</span>
-                            </div>
+                weeklySchedule.map((day) => (
+                    <div class="schedule-row">
+                        <div class="row-content">
+                            <span class="weekday">{day.weekday}</span>
+                            <span class="schedule">{day.schedule}</span>
                         </div>
-                    )
-                })
+                    </div>
+                ))
             }
         </div>
     </div>
+
     <hr>
+
     <div class="availability-container">
-        <img src="images/costa-rica.png" alt="costa-rica-7-provinces" />
+        <Image src={costaRica} alt="costa-rica-7-provinces" />
+
         <div>
             <h2>Ofrecemos Servicio en las <span>7 Provincias</span></h2>
         </div>
     </div>
+
     <hr>
 </section>
+
+<script>
+    const daysMap: Record<string, string> = {
+        Sunday: "Domingo",
+        Monday: "Lunes",
+        Tuesday: "Martes",
+        Wednesday: "Miércoles",
+        Thursday: "Jueves",
+        Friday: "Viernes",
+        Saturday: "Sábado"
+    }
+
+    const currentDay = daysMap[
+        new Intl.DateTimeFormat("en-US", {
+            timeZone: "America/Costa_Rica",
+            weekday: "long"
+        }).format(new Date())
+    ]
+
+    document.querySelectorAll(".schedule-row").forEach((row) => {
+        const weekday = row.querySelector(".weekday")?.textContent?.trim()
+
+        if (weekday === currentDay) {
+            const content = row.querySelector(".row-content")
+
+            content?.classList.add("today")
+
+            const tag = document.createElement("span")
+            tag.className = "today-tag"
+            tag.textContent = "Hoy"
+
+            row.prepend(tag)
+        }
+    })
+</script>

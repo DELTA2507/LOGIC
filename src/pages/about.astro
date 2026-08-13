@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets"
+import logo from "../assets/logo.png"
+import logicOwner from "../assets/logic-owner.jpg"
 import "../../styles/page-styles/about.css"
 import AboutCarousel from "../components/AboutCarousel/AboutCarousel.astro"
 import Layout from "../layouts/Layout.astro"
@@ -20,7 +23,7 @@ import Layout from "../layouts/Layout.astro"
                 </div>
             </div>
             <div class="about-image">
-                <img src="images/logo.png" alt="Acerca de LOGIC" />
+                <Image src={logo} alt="Acerca de LOGIC" />
             </div>
         </section>
         <section class="about-block reverse">
@@ -40,7 +43,7 @@ import Layout from "../layouts/Layout.astro"
                 </div>
             </div>
             <div class="about-image">
-                <img class="contain-override" src="images/logic-owner.jpg" alt="Acerca de LOGIC" />
+                <Image class="contain-override" src={logicOwner} alt="Acerca de LOGIC" />
             </div>
         </section>
     </main>

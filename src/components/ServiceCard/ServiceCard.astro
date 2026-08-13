@@ -1,10 +1,11 @@
 ---
+import { Image } from "astro:assets"
 import "./ServiceCard.css"
 const { image, title, description } = Astro.props
 ---
 
 <div class="service_item">
-    <img src={image} alt={title} />
+    <Image src={image} alt={title} class="service_image"/>
     <h3>{title}</h3>
     <p>
         {description}
