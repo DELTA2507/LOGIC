@@ -7,13 +7,13 @@
     padding: 5rem 6rem;
     background-color: #ffffff;
     color: #000000;
-    min-height: 100vh;
+    /* Antes 100vh: en pantallas grandes dejaba un hueco enorme debajo */
+    min-height: min(100vh, 760px);
 }
 
 /* ===== CONTACT INFO (left column) ===== */
 .hero-contact h1 {
     font-size: clamp(2.5rem, 5vw, 3.5rem);
-    font-weight: 700;
     margin-bottom: 3rem;
     line-height: 1.1;
 }
@@ -27,10 +27,12 @@
     gap: 2rem;
 }
 
-.contact-information-element {
+/* Cada fila es un enlace: círculo + texto */
+.contact-link {
     display: flex;
     align-items: center;
     gap: 1.25rem;
+    width: fit-content;
 }
 
 .contact-information-element .icon {
@@ -42,6 +44,9 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    transition:
+        background-color 0.25s ease,
+        transform 0.25s ease;
 }
 
 .contact-information-element .icon iconify-icon {
@@ -56,78 +61,155 @@
     line-height: 1.5;
 }
 
+/* Hover / foco: color de marca (--brand viene del data) o gris neutro */
+.contact-link:hover .icon,
+.contact-link:focus-visible .icon {
+    background-color: var(--brand, var(--color-hover));
+    transform: translateY(-3px);
+}
+
+.contact-link:hover p {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.contact-link:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 6px;
+    border-radius: 999px;
+}
+
 /* ===== FORM (right column) ===== */
+/* Tarjeta: mismo lenguaje (radio 18px) que las cards de equipos y servicios */
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
+    padding: 2rem;
+    background: var(--color-bg-secondary);
+    border-radius: 18px;
 }
 
-.name-row {
+.contact-form .name-row {
     display: flex;
-    gap: 1.5rem;
+    gap: 1.25rem;
 }
 
-.name-row .input-group {
+.contact-form .name-row .input-group {
     flex: 1;
 }
 
-.input-group {
+.contact-form .input-group {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-label {
+.contact-form label {
     font-size: 0.9rem;
-    color: #555;
-    letter-spacing: 0.01em;
+    font-weight: 500;
+    color: var(--color-text);
 }
 
-input,
-textarea {
+.contact-form input,
+.contact-form textarea {
     width: 100%;
     padding: 0.875rem 1rem;
-    border: 1px solid #000000;
-    background: transparent;
+    border: 1px solid #cfcfcf;
+    border-radius: 10px;
+    background: #ffffff;
     font-size: 1rem;
-    outline: none;
     color: #000000;
-    transition: border-color 0.2s ease;
+    outline: none;
     box-sizing: border-box;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-input:focus,
-textarea:focus {
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #767676;
+}
+
+.contact-form input:hover,
+.contact-form textarea:hover {
+    border-color: #8a8a8a;
+}
+
+/* Foco visible: borde negro engrosado */
+.contact-form input:focus,
+.contact-form textarea:focus {
     border-color: #000000;
+    box-shadow: 0 0 0 1px #000000;
 }
 
-textarea {
+/* Error: solo aparece después de que la persona interactúa con el campo */
+.contact-form input:user-invalid,
+.contact-form textarea:user-invalid {
+    border-color: #b91c1c;
+}
+
+.contact-form textarea {
     min-height: 160px;
     resize: vertical;
 }
 
-button[type="submit"] {
+/* Botón en píldora, igual que los CTAButton del sitio */
+.contact-form button[type="submit"] {
     align-self: flex-end;
     padding: 0.875rem 2.5rem;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     background-color: #000000;
     color: #ffffff;
-    transition: opacity 0.2s ease;
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
 }
 
-button[type="submit"]:hover {
-    opacity: 0.75;
+.contact-form button[type="submit"]:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
 }
 
+.contact-form button[type="submit"]:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 3px;
+}
+
+/* ===== MAP ===== */
 .map-container {
     width: 100%;
     height: 500px;
     padding: 0rem 2rem 4rem 2rem;
+}
+
+.map-container iframe {
+    border-radius: 18px;
+}
+
+/* ===== MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    .contact-information-element .icon {
+        transition: background-color 0.25s ease;
+    }
+
+    .contact-link:hover .icon,
+    .contact-link:focus-visible .icon {
+        transform: none;
+    }
+
+    .contact-form button[type="submit"] {
+        transition: opacity 0.2s ease;
+    }
+
+    .contact-form button[type="submit"]:hover {
+        transform: none;
+    }
 }
 
 /* ===== RESPONSIVE ===== */
@@ -136,10 +218,19 @@ button[type="submit"]:hover {
         grid-template-columns: 1fr;
         padding: 3rem 1.5rem;
         gap: 3rem;
+        min-height: auto;
     }
 
-    .name-row {
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .contact-form .name-row {
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.25rem;
+    }
+
+    .contact-form button[type="submit"] {
+        width: 100%;
     }
 }

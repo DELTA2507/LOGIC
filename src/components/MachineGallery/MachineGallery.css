@@ -1,0 +1,134 @@
+/*
+ * Flex + wrap + centrado: con 7, 8 o 10 máquinas la última fila
+ * queda centrada, sin tarjeta huérfana a la izquierda.
+ */
+.machine-gallery {
+    --gallery-gap: 1.5rem;
+    --gallery-cols: 3;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--gallery-gap);
+    width: 100%;
+    max-width: 1100px;
+}
+
+.machine-card {
+    flex: 0 0 calc(
+        (100% - (var(--gallery-cols) - 1) * var(--gallery-gap)) / var(--gallery-cols)
+    );
+}
+
+.machine-card__inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.machine-card:hover .machine-card__inner {
+    border-color: var(--color-secondary);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Imagen ---------- */
+.machine-card__media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
+}
+
+/* Unifica fotos de catálogo, fondos negros y fotos reales del celular */
+.machine-card__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(22px);
+    transform: scale(1.4);
+    opacity: 0.7;
+}
+
+.machine-card__photo {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.75rem;
+    transition: transform 0.4s ease;
+}
+
+.machine-card:hover .machine-card__photo {
+    transform: scale(1.05);
+}
+
+.machine-card__tag {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    background: var(--color-primary);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+/* ---------- Texto ---------- */
+.machine-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1.1rem 1.25rem 1.35rem;
+}
+
+.machine-card__name {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.machine-card__description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .machine-gallery {
+        --gallery-cols: 2;
+    }
+}
+
+@media (max-width: 560px) {
+    .machine-gallery {
+        --gallery-cols: 1;
+        --gallery-gap: 1rem;
+    }
+
+    .machine-card__media {
+        aspect-ratio: 16 / 11;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .machine-card__inner,
+    .machine-card__photo {
+        transition: none;
+    }
+
+    .machine-card:hover .machine-card__photo {
+        transform: none;
+    }
+}

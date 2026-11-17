@@ -5,15 +5,17 @@ import ServiceCard from "../ServiceCard/ServiceCard.astro"
 ---
 
 <section class="services">
-    <h2 class="services-title">Nuestros Servicios</h2>
+    <div class="services-header">
+        <h2 class="services-title">Nuestros Servicios</h2>
+        <p class="services-subtitle">
+            Diagnóstico, reparación y mantenimiento profesional de equipamiento médico y estético.
+        </p>
+    </div>
+
     <div class="services-list">
         {
             services.map((service) => (
-                <ServiceCard 
-                    image={service.image}
-                    title={service.title}
-                    description={service.description}
-                />
+                <ServiceCard {...service} />
             ))
         }
     </div>

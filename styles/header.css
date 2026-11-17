@@ -2,12 +2,25 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 2rem;
+    padding: 0.75rem 2rem;
+}
+
+.logo-link {
+    display: block;
+    flex-shrink: 0;
 }
 
 .logo {
-    height: 150px;
-    width: 150px;
+    /* Se adapta al ancho de pantalla: entre 56px (móvil) y 80px (desktop) */
+    height: clamp(56px, 7vw, 80px);
+    /* auto = conserva la proporción real del logo (antes se forzaba un cuadrado de 150x150) */
+    width: auto;
     object-fit: contain;
     display: block;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 0.5rem 1rem;
+    }
 }

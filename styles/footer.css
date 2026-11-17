@@ -22,6 +22,7 @@
     display: block;
 }
 
+/* ===== CTA ===== */
 .footer-cta {
     display: flex;
     flex-direction: column;
@@ -39,7 +40,6 @@
     margin: 0;
 
     font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
     line-height: 1.2;
 }
 
@@ -60,47 +60,23 @@
     gap: 1rem;
 }
 
-.btn-whatsapp,
-.btn-email {
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-
+/* Acotado al footer: antes estas reglas afectaban a todos los CTAButton del sitio */
+.footer-cta-actions .hero-cta-button {
     padding: .9rem 1.8rem;
-
     border-radius: 999px;
-
-    text-decoration: none;
-
-    transition: .2s ease;
+    gap: .5rem;
 }
 
-.btn-whatsapp {
-    color: white;
-    background: #25d366;
+.footer-cta-actions .btn-email {
+    border: 1px solid rgba(255, 255, 255, .15);
 }
 
-.btn-whatsapp:hover {
-    transform: translateY(-2px);
-}
-
-.btn-email {
-    color: white;
-
-    border: 1px solid rgba(255,255,255,.15);
-
-    background: black;
-}
-
-.btn-email:hover {
-    transform: translateY(-2px);
-}
-
+/* ===== MARCA ===== */
 .footer-brand {
     display: flex;
     justify-content: center;
 
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .footer-brand img {
@@ -110,20 +86,22 @@
     border-radius: .5rem;
 }
 
-.footer-contact-information-container {
-    display: flex;
-    justify-content: center;
-}
-
+/* ===== DATOS DE CONTACTO ===== */
 .footer-contact-information {
+    list-style: none;
+    padding: 0;
+
     display: flex;
-    flex-direction: column;
-    align-items: left;
-    gap: .75rem;
-    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 2.5rem;
+
+    max-width: 900px;
+    margin: 0 auto 3rem;
 }
 
-.footer-contact-item {
+/* Cada fila es un enlace: círculo + texto */
+.footer-contact-link {
     display: flex;
     align-items: center;
     gap: .75rem;
@@ -133,22 +111,64 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 
     width: 3rem;
     height: 3rem;
 
-    font-size: 1.8rem;
-
     border-radius: 100%;
 
-    background: rgb(255, 255, 255);
+    background: #ffffff;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
 }
 
-.footer-contact-item p {
+.footer-contact-icon iconify-icon {
+    font-size: 1.8rem;
+    color: #000000; /* negro por defecto, el círculo es blanco */
+    transition: color .25s ease;
+}
+
+.footer-contact-link p {
     margin: 0;
     color: #d6d6d6;
+    overflow-wrap: anywhere;
+    transition: color .2s ease;
 }
 
+/* Hover / foco: color de marca (--brand viene del data) o gris neutro */
+.footer-contact-link:hover .footer-contact-icon,
+.footer-contact-link:focus-visible .footer-contact-icon {
+    background-color: var(--brand, #d6d6d6);
+    transform: translateY(-3px);
+}
+
+/* El icono solo se vuelve blanco cuando hay color de marca detrás.
+   Sin --brand-ink (la dirección) se queda negro sobre el gris neutro. */
+.footer-contact-link:hover .footer-contact-icon iconify-icon,
+.footer-contact-link:focus-visible .footer-contact-icon iconify-icon {
+    color: var(--brand-ink, #000000);
+}
+
+.footer-contact-link:hover p,
+.footer-contact-link:focus-visible p {
+    color: #ffffff;
+}
+
+.footer-contact-link:hover p {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
+.footer-contact-link:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 6px;
+    border-radius: 999px;
+}
+
+/* ===== NAVEGACIÓN ===== */
 .footer-navigation {
     display: flex;
     justify-content: center;
@@ -165,6 +185,7 @@
     border-top: 1px solid rgba(255,255,255,.15);
 }
 
+/* ===== COPYRIGHT ===== */
 .footer-copyright {
     text-align: center;
 
@@ -173,11 +194,45 @@
     font-size: .9rem;
 }
 
-.footer-copyright p, a {
+/* Antes: ".footer-copyright p, a" (la "a" afectaba a todo el sitio) */
+.footer-copyright p,
+.footer-copyright a {
     color: #cfcfcf;
     margin: .25rem 0;
 }
 
 .footer-copyright a:hover {
     text-decoration: underline;
+}
+
+.footer-copyright a:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* ===== MOTION ===== */
+@media (prefers-reduced-motion: reduce) {
+    .footer-contact-icon {
+        transition: background-color .25s ease;
+    }
+
+    .footer-contact-link:hover .footer-contact-icon,
+    .footer-contact-link:focus-visible .footer-contact-icon {
+        transform: none;
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+    .footer {
+        padding: 1rem 1.25rem 2rem;
+    }
+
+    /* En móvil, columna alineada a la izquierda y centrada como bloque */
+    .footer-contact-information {
+        flex-direction: column;
+        align-items: flex-start;
+        width: fit-content;
+        gap: 1rem;
+    }
 }

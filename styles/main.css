@@ -44,9 +44,44 @@ a {
 }
 
 h1,
-h2,
+h2 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.03em;
+    font-weight: 400; /* antes 100, que no está cargado y caía en 400 */
+}
+
 h3 {
     font-family: var(--font-heading);
-	letter-spacing: -0.03em;
-    font-weight: 100;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+}
+
+/* Salida y entrada del contenido: fundido corto con un leve desenfoque */
+::view-transition-old(root) {
+    animation: 220ms ease both page-out;
+}
+
+::view-transition-new(root) {
+    animation: 320ms ease both page-in;
+}
+
+@keyframes page-out {
+    to {
+        opacity: 0;
+        filter: blur(4px);
+    }
+}
+
+@keyframes page-in {
+    from {
+        opacity: 0;
+        filter: blur(4px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root),
+    ::view-transition-new(root) {
+        animation: none;
+    }
 }

@@ -1,66 +1,120 @@
-.service_item {
-    width: 300px;
-    background: #ffffff;
-    border-radius: 15px;
+.service-card {
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-
-    transform: translateY(0) scale(1);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-
-    will-change: transform;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 18px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.service_item:hover {
-    transform: translateY(-8px) scale(1.03);
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+.service-card:hover,
+.service-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
-/* IMAGEN */
-.service_image {
-    display: block;
+.service-card:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+/* ---------- Imagen ---------- */
+.service-card__media {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
+}
+
+.service-card__media img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
+    height: 100%;
     object-fit: cover;
-
-    transition: transform 0.35s ease;
-    transform: scale(1);
+    display: block;
+    transition: transform 0.4s ease;
 }
 
-.service_item:hover img {
-    transform: scale(1.08);
+.service-card:hover .service-card__media img {
+    transform: scale(1.05);
 }
 
-/* CONTENIDO */
-.service_item h3,
-.service_item p {
-    padding-inline: 1.5rem;
+/* ---------- Texto ---------- */
+.service-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 1.25rem 1.4rem;
 }
 
-.service_item h3 {
-    margin: 1.5rem 0 0.75rem;
-    color: #111;
-    font-size: 1.35rem;
+.service-card__title {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.service-card__description {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary);
+}
+
+/* ---------- Qué incluye ---------- */
+.service-card__includes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-top: 0.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.service-card__includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.service-card__includes iconify-icon {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    font-size: 1.1rem;
+    color: var(--color-text);
+}
+
+/* ---------- Límite del servicio ---------- */
+.service-card__limit {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--color-secondary);
+}
+
+/* ---------- Enlace (siempre al fondo, aunque cambie el alto) ---------- */
+.service-card__link {
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.875rem;
     font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
 }
 
-.service_item p {
-    margin: 0;
-    padding-bottom: 1.5rem;
-    color: #666;
-    line-height: 1.7;
-}
+@media (prefers-reduced-motion: reduce) {
+    .service-card,
+    .service-card__media img {
+        transition: none;
+    }
 
-/* EXTRA POLISH: hover suave sin “salto” */
-.service_item * {
-    backface-visibility: hidden;
-}
+    .service-card:hover,
+    .service-card:focus-visible {
+        transform: none;
+    }
 
-/* OPCIONAL: efecto hover más “premium” */
-.service_item:hover {
-    box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.12),
-        0 0 0 1px rgba(0, 0, 0, 0.04);
+    .service-card:hover .service-card__media img {
+        transform: none;
+    }
 }

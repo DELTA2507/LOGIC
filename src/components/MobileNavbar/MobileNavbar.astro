@@ -6,6 +6,8 @@ import "./MobileNavbar.css";
     id="mobile-menu-button"
     class="mobile-menu-button"
     aria-label="Abrir menú"
+    aria-controls="mobile-menu"
+    aria-expanded="false"
 >
     <span></span>
     <span></span>
@@ -14,7 +16,7 @@ import "./MobileNavbar.css";
 
 <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
 
-<nav id="mobile-menu" class="mobile-menu">
+<nav id="mobile-menu" class="mobile-menu" aria-label="Menú principal">
     <ul class="mobile-nav-link-list">
         <li class="nav-link">
             <a href="/">Inicio</a>
@@ -35,17 +37,36 @@ import "./MobileNavbar.css";
 </nav>
 
 <script>
-    const button = document.getElementById("mobile-menu-button");
-    const menu = document.getElementById("mobile-menu");
-    const overlay = document.getElementById("mobile-menu-overlay");
+    // Los elementos se buscan al momento del evento: así sigue funcionando
+    // aunque el router de Astro vuelva a dibujar el header en cada navegación.
+    function setMenuOpen(open: boolean) {
+        const button = document.getElementById("mobile-menu-button")
+        const menu = document.getElementById("mobile-menu")
+        const overlay = document.getElementById("mobile-menu-overlay")
 
-    button?.addEventListener("click", () => {
-        menu?.classList.toggle("active");
-        overlay?.classList.toggle("active");
-    });
+        menu?.classList.toggle("active", open)
+        overlay?.classList.toggle("active", open)
+        button?.setAttribute("aria-expanded", String(open))
+        button?.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú")
+    }
 
-    overlay?.addEventListener("click", () => {
-        menu?.classList.remove("active");
-        overlay?.classList.remove("active");
-    });
+    document.addEventListener("click", (event) => {
+        const target = event.target as Element
+
+        if (target.closest("#mobile-menu-button")) {
+            const isOpen = document
+                .getElementById("mobile-menu")
+                ?.classList.contains("active") ?? false
+            setMenuOpen(!isOpen)
+        } else if (
+            target.closest("#mobile-menu-overlay") ||
+            target.closest("#mobile-menu a")
+        ) {
+            setMenuOpen(false)
+        }
+    })
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setMenuOpen(false)
+    })
 </script>

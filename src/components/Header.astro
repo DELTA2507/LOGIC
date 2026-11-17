@@ -8,11 +8,16 @@ import MobileNavbar from "./MobileNavbar/MobileNavbar.astro"
 ---
 
 <header>
-	<Image
-		class="logo"
-		src={logo}
-		alt="logic-st-logo"
-	/>
+	<a class="logo-link" href="/" aria-label="Ir al inicio">
+		<Image
+			class="logo"
+			src={logo}
+			alt="LOGIC Soluciones Técnicas"
+			widths={[160, 240]}
+			sizes="80px"
+			loading="eager"
+		/>
+	</a>
 
 	<Navbar theme="light" />
 	<MobileNavbar />

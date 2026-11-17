@@ -15,7 +15,6 @@
 .services-hero h2 {
     color: white;
     font-size: 3rem;
-    font-weight: 700;
     margin: 0;
     letter-spacing: -0.5px;
 }
@@ -39,6 +38,8 @@
     display: flex;
     align-items: center;
     gap: 4rem;
+    /* Ancla: evita que un navbar fijo tape el título al llegar desde el landing */
+    scroll-margin-top: 6rem;
 }
 
 /* alternado */
@@ -76,7 +77,6 @@
 .service-content h3 {
     font-size: 2rem;
     margin: 0 0 1rem;
-    font-weight: 700;
     color: #111;
 }
 
@@ -84,6 +84,38 @@
     font-size: 1.1rem;
     color: #555;
     line-height: 1.7;
+}
+
+/* QUÉ INCLUYE */
+.service-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.service-includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    line-height: 1.5;
+}
+
+.service-includes iconify-icon {
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    font-size: 1.2rem;
+}
+
+/* LÍMITE DEL SERVICIO
+   (selector más específico para ganarle a ".service-content p") */
+.service-content .service-limit {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-secondary);
 }
 
 /* RESPONSIVE */

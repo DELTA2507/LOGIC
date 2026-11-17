@@ -9,33 +9,31 @@ import { weeklySchedule } from "../data/weeklySchedule"
     <hr>
 
     <div class="schedule-container">
-        <div>
+        <div class="schedule-text">
             <h2>Horario Semanal</h2>
             <p>Disponibilidad de servicio los 5 días de la semana.</p>
         </div>
 
-        <div class="weekly-schedule-container">
+        <ul class="weekly-schedule-container">
             {
                 weeklySchedule.map((day) => (
-                    <div class="schedule-row">
-                        <div class="row-content">
-                            <span class="weekday">{day.weekday}</span>
-                            <span class="schedule">{day.schedule}</span>
-                        </div>
-                    </div>
+                    <li class="schedule-row">
+                        <span class="weekday">{day.weekday}</span>
+                        <span class="schedule">{day.schedule}</span>
+                    </li>
                 ))
             }
-        </div>
+        </ul>
     </div>
 
     <hr>
 
     <div class="availability-container">
-        <Image src={costaRica} alt="costa-rica-7-provinces" />
+        <Image src={costaRica} alt="Mapa de Costa Rica con sus 7 provincias" />
 
-        <div>
-            <h2>Ofrecemos Servicio en las <span>7 Provincias</span></h2>
-        </div>
+        <h2 class="availability-title">
+            Ofrecemos Servicio en las <br><span>7 Provincias</span>
+        </h2>
     </div>
 
     <hr>
@@ -52,26 +50,36 @@ import { weeklySchedule } from "../data/weeklySchedule"
         Saturday: "Sábado"
     }
 
-    const currentDay = daysMap[
-        new Intl.DateTimeFormat("en-US", {
-            timeZone: "America/Costa_Rica",
-            weekday: "long"
-        }).format(new Date())
-    ]
+    function markCurrentDay() {
+        const currentDay = daysMap[
+            new Intl.DateTimeFormat("en-US", {
+                timeZone: "America/Costa_Rica",
+                weekday: "long"
+            }).format(new Date())
+        ]
 
-    document.querySelectorAll(".schedule-row").forEach((row) => {
-        const weekday = row.querySelector(".weekday")?.textContent?.trim()
+        document.querySelectorAll(".schedule-row").forEach((row) => {
+            // Limpia marcas previas para que nunca se duplique el "Hoy"
+            row.querySelector(".today-tag")?.remove()
+            row.classList.remove("today")
+            row.removeAttribute("aria-current")
 
-        if (weekday === currentDay) {
-            const content = row.querySelector(".row-content")
+            const weekday = row.querySelector(".weekday")?.textContent?.trim()
 
-            content?.classList.add("today")
+            if (weekday === currentDay) {
+                row.classList.add("today")
+                // Los lectores de pantalla anuncian "fecha actual"; la etiqueta es solo visual
+                row.setAttribute("aria-current", "date")
 
-            const tag = document.createElement("span")
-            tag.className = "today-tag"
-            tag.textContent = "Hoy"
+                const tag = document.createElement("span")
+                tag.className = "today-tag"
+                tag.setAttribute("aria-hidden", "true")
+                tag.textContent = "Hoy"
 
-            row.prepend(tag)
-        }
-    })
+                row.prepend(tag)
+            }
+        })
+    }
+
+    document.addEventListener("astro:page-load", markCurrentDay)
 </script>

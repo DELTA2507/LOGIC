@@ -1,5 +1,6 @@
 ---
 import "./CTAButton.css"
+import { contact } from "../../data/contact"
 
 interface Props {
     type: "whatsapp" | "email" | "facebook"
@@ -7,9 +8,11 @@ interface Props {
 
 const { type } = Astro.props
 
+const link = (id: string) => contact.find((item) => item.id === id)!.href
+
 const button_config = {
     whatsapp: {
-        href: "https://wa.me/50683802710",
+        href: link("whatsapp"),
         label: "Whatsapp",
         icon: "mdi:whatsapp",
         class_name: "btn-whatsapp"
@@ -21,7 +24,7 @@ const button_config = {
         class_name: "btn-email"
     },
     facebook: {
-        href: "https://www.facebook.com/logic.estetica",
+        href: link("facebook"),
         label: "Facebook",
         icon: "mdi:facebook",
         class_name: "btn-facebook"
@@ -38,6 +41,7 @@ const config = button_config[type]
 >
     <iconify-icon
         icon={config.icon}
+        noobserver
         style="color: white;"
     ></iconify-icon>
 

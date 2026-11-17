@@ -1,23 +1,12 @@
 ---
 import "./AboutCarousel.css"
 import { Image } from "astro:assets"
-import iplMachine from "../../assets/machines/ipl-machine.jpg"
-import ipl2Machine from "../../assets/machines/ipl2-machine.jpg"
-import laserMachine from "../../assets/machines/laser-machine.jpg"
-import radiofrecuenciaMachine from "../../assets/machines/radiofrecuencia-machine.png"
-import crioterapiaMachine from "../../assets/machines/crioterapia-machine.png"
-import ultracavitacionMachine from "../../assets/machines/ultracavitacion-machine.jpg"
-import picosecondLampMachine from "../../assets/machines/picosecond-lamp-machine.jpg"
+import { machines } from "../../data/machines"
 
-const carouselImages = [
-    { image: iplMachine , alt: "Equipo IPL" },
-    { image: ipl2Machine, alt: "Equipo IPL 2" },
-    { image: laserMachine, alt: "Depilacion Laser" },
-    { image: radiofrecuenciaMachine, alt: "Radiofrecuencia" },
-    { image: crioterapiaMachine, alt: "Crioterapia" },
-    { image: ultracavitacionMachine, alt: "Ultracavitación" },
-    { image: picosecondLampMachine, alt: "Lámpara Picosecond" },
-]
+const carouselImages = machines.map((machine) => ({
+    image: machine.image,
+    alt: machine.alt ?? machine.name,
+}))
 ---
 
 <div class="about-carousel">
@@ -36,29 +25,38 @@ const carouselImages = [
 </div>
 
 <script>
-    const track = document.querySelector(".carousel-track") as HTMLElement
-    const dots = document.querySelectorAll(".carousel-dot")
-    const total = dots.length
-    let current = 0
-    let interval: ReturnType<typeof setInterval>
+    let interval: ReturnType<typeof setInterval> | undefined
 
-    function goTo(index: number) {
-        current = index
-        track.style.transform = `translateX(-${current * 100}%)`
-        dots.forEach((dot, i) => dot.classList.toggle("active", i === current))
-    }
+    function initAboutCarousel() {
+        const track = document.querySelector<HTMLElement>(".about-carousel .carousel-track")
+        const dots = document.querySelectorAll<HTMLButtonElement>(".about-carousel .carousel-dot")
+        if (!track || dots.length === 0) return
 
-    function next() {
-        goTo((current + 1) % total)
-    }
+        const total = dots.length
+        let current = 0
 
-    dots.forEach((dot, i) => {
-        dot.addEventListener("click", () => {
-            clearInterval(interval)
-            goTo(i)
-            interval = setInterval(next, 3000)
+        function goTo(index: number) {
+            current = index
+            track!.style.transform = `translateX(-${current * 100}%)`
+            dots.forEach((dot, i) => dot.classList.toggle("active", i === current))
+        }
+
+        function next() {
+            goTo((current + 1) % total)
+        }
+
+        // Evita intervalos duplicados al volver a esta página
+        clearInterval(interval)
+        interval = setInterval(next, 3000)
+
+        dots.forEach((dot, i) => {
+            dot.addEventListener("click", () => {
+                clearInterval(interval)
+                goTo(i)
+                interval = setInterval(next, 3000)
+            })
         })
-    })
+    }
 
-    interval = setInterval(next, 3000)
+    document.addEventListener("astro:page-load", initAboutCarousel)
 </script>

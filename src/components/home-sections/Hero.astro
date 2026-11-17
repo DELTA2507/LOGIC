@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets"
-import logicHand from "../../assets/logic-hand.png"
+import logicHand from "../../assets/logic-hand-enhanced.png"
 import "../../../styles/home-sections-styles/hero.css"
 import CTAButton from "../CTAButton/CTAButton.astro"
 ---
@@ -11,7 +11,7 @@ import CTAButton from "../CTAButton/CTAButton.astro"
             LOGIC ST - SOLUCIONES TECNICAS
         </span>
         <h1 class="hero-title">
-            Reparación y mantenimiento 
+            Reparación y mantenimiento
             de equipo médico y estético
         </h1>
         <p class="hero-description">
@@ -27,8 +27,22 @@ import CTAButton from "../CTAButton/CTAButton.astro"
                 <CTAButton type="email" />
                 <CTAButton type="facebook" />
             </div>
+            <p class="hero-trust">
+                Atención en las 7 provincias · Lunes a Viernes, 9:00 AM - 5:00 PM
+            </p>
         </div>
     </div>
 
-    <Image class="hero-image" src={logicHand} alt="logic-hand" />
+    <!-- Slot visual: hoy es una imagen; mañana puede ser un visor 3D -->
+    <div class="hero-media">
+        <Image
+            class="hero-image"
+            src={logicHand}
+            alt="Mano robótica ofreciendo ayuda"
+            widths={[640, 960, 1280]}
+            sizes="(max-width: 926px) 95vw, 50vw"
+            loading="eager"
+            fetchpriority="high"
+        />
+    </div>
 </section>
