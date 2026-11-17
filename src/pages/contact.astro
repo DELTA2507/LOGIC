@@ -3,6 +3,9 @@ import "../../styles/page-styles/contact.css"
 import { contact } from "../data/contact";
 import Layout from "../layouts/Layout.astro";
 import ServiceAvailability from "../components/ServiceAvailability.astro";
+
+// "mailto:carlos.alberto.ugalde@gmail.com", sale del data
+const mailto = contact.find((item) => item.id === "email")!.href;
 ---
 
 <Layout title="Contáctanos - LOGIC ST Costa Rica" description="Póngase en contacto para brindarle servicio de reparación, mantenimiento o diagnóstico a sus equipos médicos y estéticos.">
@@ -12,121 +15,89 @@ import ServiceAvailability from "../components/ServiceAvailability.astro";
                 <h1>Contáctanos</h1>
                 <ul class="contact-information">
                     {
-                        contact.map((contact) => (
+                        contact.map((item) => (
                             <li class="contact-information-element">
-                                <div class="icon">
-                                    <iconify-icon icon={contact.icon}></iconify-icon>
-                                </div>
-                                <p>{contact.description}</p>
+                                <a
+                                    class="contact-link"
+                                    href={item.href}
+                                    target={item.external ? "_blank" : undefined}
+                                    rel={item.external ? "noopener noreferrer" : undefined}
+                                    aria-label={`${item.title}: ${item.description.replace("\n", " ")}`}
+                                    style={item.hoverColor ? `--brand: ${item.hoverColor}` : undefined}
+                                >
+                                    <div class="icon">
+                                        <iconify-icon noobserver icon={item.icon}></iconify-icon>
+                                    </div>
+                                    <p>{item.description}</p>
+                                </a>
                             </li>
                         ))
                     }
                 </ul>
             </div>
-            <form class="contact-form">
+
+            <form class="contact-form" data-mailto={mailto}>
                 <div class="name-row">
                     <div class="input-group">
-                        <label for="first-name">
-                            Nombre *
-                        </label>
-
+                        <label for="first-name">Nombre *</label>
                         <input
                             id="first-name"
                             name="first-name"
                             type="text"
+                            autocomplete="given-name"
                             required
                         />
                     </div>
 
                     <div class="input-group">
-                        <label for="last-name">
-                            Apellido *
-                        </label>
-
+                        <label for="last-name">Apellido *</label>
                         <input
                             id="last-name"
                             name="last-name"
                             type="text"
+                            autocomplete="family-name"
                             required
                         />
                     </div>
                 </div>
 
                 <div class="input-group">
-                    <label for="email">
-                        Correo de Gmail *
-                    </label>
-
+                    <label for="email">Correo electrónico *</label>
                     <input
                         id="email"
                         name="email"
                         type="email"
+                        autocomplete="email"
                         required
                     />
                 </div>
 
                 <div class="input-group">
-                    <label for="phone">
-                        Teléfono
-                    </label>
-
+                    <label for="phone">Teléfono (opcional)</label>
                     <input
                         id="phone"
                         name="phone"
                         type="tel"
+                        autocomplete="tel"
                     />
                 </div>
 
                 <div class="input-group">
-                    <label for="message">
-                        Redacta aquí tu mensaje
-                    </label>
-
+                    <label for="message">Mensaje *</label>
                     <textarea
                         id="message"
                         name="message"
+                        placeholder="Cuéntanos qué equipo tienes y qué falla presenta."
+                        required
                     ></textarea>
                 </div>
 
-                <button type="submit">
-                    Enviar
-                </button>
+                <button type="submit">Enviar</button>
             </form>
+        </section>
 
-            <script>
-                const form = document.querySelector(".contact-form") as HTMLFormElement
-
-                form?.addEventListener("submit", (event) => {
-                    event.preventDefault()
-
-                    const formData = new FormData(form)
-
-                    const firstName = formData.get("first-name")
-                    const lastName = formData.get("last-name")
-                    const email = formData.get("email")
-                    const phone = formData.get("phone")
-                    const message = formData.get("message")
-
-                    const subject = encodeURIComponent(
-                        `Nuevo mensaje de ${firstName} ${lastName}`
-                    )
-
-                    const body = encodeURIComponent(
-                        `Nombre: ${firstName} ${lastName}
-
-                        Correo: ${email}
-
-                        Teléfono: ${phone}
-
-                        Mensaje:
-                        ${message}`
-                    )
-
-                    window.location.href = `mailto:tuemail@gmail.com?subject=${subject}&body=${body}`
-                })
-            </script>
-		</section>
         <ServiceAvailability />
+
         <div class="map-container">
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d982.2503623553656!2d-84.11989928776421!3d10.016738066443125!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2scr!4v1780782130094!5m2!1ses-419!2scr"
@@ -142,3 +113,39 @@ import ServiceAvailability from "../components/ServiceAvailability.astro";
         </div>
     </main>
 </Layout>
+
+<script>
+    function initContactForm() {
+        const form = document.querySelector<HTMLFormElement>(".contact-form")
+        if (!form) return
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault()
+
+            const data = new FormData(form)
+            const field = (name: string) => String(data.get(name) ?? "").trim()
+
+            const firstName = field("first-name")
+            const lastName = field("last-name")
+
+            const subject = encodeURIComponent(
+                `Nuevo mensaje de ${firstName} ${lastName} desde el sitio web`
+            )
+
+            const body = encodeURIComponent(
+                [
+                    `Nombre: ${firstName} ${lastName}`,
+                    `Correo: ${field("email")}`,
+                    `Teléfono: ${field("phone") || "No indicado"}`,
+                    "",
+                    "Mensaje:",
+                    field("message"),
+                ].join("\n")
+            )
+
+            window.location.href = `${form.dataset.mailto}?subject=${subject}&body=${body}`
+        })
+    }
+
+    document.addEventListener("astro:page-load", initContactForm)
+</script>

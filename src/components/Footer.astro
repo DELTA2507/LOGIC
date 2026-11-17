@@ -47,20 +47,27 @@ import Navbar from "./Navbar.astro"
 
     </div>
 
-    <div class="footer-contact-information-container">
-        <div class="footer-contact-information">
-            {
-                contact.map((item) => (
-                    <div class="footer-contact-item">
+    <ul class="footer-contact-information">
+        {
+            contact.map((item) => (
+                <li>
+                    <a
+                        class="footer-contact-link"
+                        href={item.href}
+                        target={item.external ? "_blank" : undefined}
+                        rel={item.external ? "noopener noreferrer" : undefined}
+                        aria-label={`${item.title}: ${item.description.replace("\n", " ")}`}
+                        style={item.hoverColor ? `--brand: ${item.hoverColor}; --brand-ink: #ffffff` : undefined}
+                    >
                         <div class="footer-contact-icon">
-                            <iconify-icon icon={item.icon}></iconify-icon>
+                            <iconify-icon noobserver icon={item.icon}></iconify-icon>
                         </div>
                         <p>{item.description}</p>
-                    </div>
-                ))
-            }
-        </div>
-    </div>
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
 
     <div class="footer-navigation">
         <Navbar theme="dark"/>

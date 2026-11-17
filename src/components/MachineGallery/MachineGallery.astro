@@ -1,0 +1,41 @@
+---
+import "./MachineGallery.css";
+import { Image } from "astro:assets";
+import { machines } from "../../data/machines";
+---
+
+<ul class="machine-gallery">
+    {
+        machines.map((machine) => (
+            <li class="machine-card">
+                <article class="machine-card__inner">
+                    <div class="machine-card__media">
+                        {/* Fondo decorativo: la misma foto muy pequeña y desenfocada */}
+                        <Image
+                            class="machine-card__backdrop"
+                            src={machine.image}
+                            alt=""
+                            width={64}
+                            aria-hidden="true"
+                            loading="lazy"
+                        />
+                        <Image
+                            class="machine-card__photo"
+                            src={machine.image}
+                            alt={machine.alt ?? machine.name}
+                            widths={[400, 800]}
+                            sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 340px"
+                            loading="lazy"
+                        />
+                        <span class="machine-card__tag">{machine.category}</span>
+                    </div>
+
+                    <div class="machine-card__body">
+                        <h3 class="machine-card__name">{machine.name}</h3>
+                        <p class="machine-card__description">{machine.description}</p>
+                    </div>
+                </article>
+            </li>
+        ))
+    }
+</ul>

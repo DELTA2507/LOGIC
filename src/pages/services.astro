@@ -9,7 +9,7 @@ import Layout from "../layouts/Layout.astro";
 	<main class="services">
         <div class="services-hero">
             <h2>Nuestros Servicios</h2>
-            <p>Diagnóstico, Reparación y Mantenimiento profesional de equipamento médico y estético</p>
+            <p>Diagnóstico, Reparación y Mantenimiento profesional de equipamiento médico y estético</p>
         </div>
 
         <div class="services-list">
@@ -18,14 +18,36 @@ import Layout from "../layouts/Layout.astro";
                     const isReversed = index % 2 !== 0
 
                     return (
-                        <div class={`service-row ${isReversed ? "reverse" : ""}`}>
+                        <div
+                            id={service.slug}
+                            class={`service-row ${isReversed ? "reverse" : ""}`}
+                        >
                             <div class="service-image">
-                                <Image src={service.image} alt={service.title} />
+                                <Image
+                                    src={service.image}
+                                    alt={service.title}
+                                    style={service.imagePosition ? `object-position: ${service.imagePosition}` : undefined}
+                                />
                             </div>
 
                             <div class="service-content">
                                 <h3>{service.title}</h3>
                                 <p>{service.description}</p>
+
+                                <ul class="service-includes">
+                                    {
+                                        service.includes.map((item) => (
+                                            <li>
+                                                <iconify-icon noobserver icon="mdi:check" aria-hidden="true" />
+                                                <span>{item}</span>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+
+                                {service.notIncluded && (
+                                    <p class="service-limit">{service.notIncluded}</p>
+                                )}
                             </div>
                         </div>
                     )

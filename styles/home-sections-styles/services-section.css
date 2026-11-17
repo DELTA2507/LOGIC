@@ -9,18 +9,62 @@
     flex-direction: column;
     align-items: center;
     padding: 8rem 4rem;
-    gap: 5rem;
+    gap: 4rem;
+}
+
+/* ---------- Encabezado ---------- */
+.services-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
 }
 
 .services-title {
     color: white;
     font-size: clamp(2rem, 8vw, 3.5rem);
-    font-weight: 100;
 }
 
+.services-subtitle {
+    max-width: 700px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* ---------- Listado de cards ---------- */
 .services-list {
+    --services-gap: 1.5rem;
+    --services-cols: 3;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5rem;
+    align-items: stretch; /* misma altura en todas las cards */
+    gap: var(--services-gap);
+    width: 100%;
+    max-width: 1100px;
+}
+
+.services-list > .service-card {
+    flex: 0 0 calc(
+        (100% - (var(--services-cols) - 1) * var(--services-gap)) / var(--services-cols)
+    );
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .services-list {
+        --services-cols: 2;
+    }
+}
+
+@media (max-width: 560px) {
+    .services {
+        padding: 5rem 1rem;
+        gap: 3rem;
+    }
+
+    .services-list {
+        --services-cols: 1;
+    }
 }
